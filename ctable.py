@@ -5,6 +5,8 @@ import time
 from streamlit_lottie import st_lottie
 import requests
 
+def convert_df(df):
+   return df.to_csv(index=False).encode('utf-8')
 def app():
     hide_st_style1 = """
             <style>
@@ -74,3 +76,10 @@ def app():
         
         except:
             pass
+    csv = convert_df(k)
+    st.download_button(
+        "Press to Download",
+        csv,
+        "file.csv",
+        "text/csv",
+         key='download-csv')
